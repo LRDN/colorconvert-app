@@ -7,4 +7,8 @@
 
   --layout-body-background-color: #{$white};
   --layout-body-box-shadow-color: #{rgba($gray-50, 0.25)};
+
+  --switch-background-color: #{$gray-30};
+  --switch-handle-background-color: #{$white};
+  --switch-handle-box-shadow-color: #{rgba($gray-50, 0.5)};
 }

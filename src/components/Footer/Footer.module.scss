@@ -1,8 +1,15 @@
 .footer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  color: var(--body-color-soft);
 
-  &__attribution {
-    color: var(--body-color-soft);
+  &__attribution a:hover {
+    color: var(--body-color);
+  }
+
+  &__icon {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }

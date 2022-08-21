@@ -24,7 +24,11 @@
   --border-radius-medium: 0.5rem;
   --border-radius-large: 1rem;
 
-  --box-shadow-small: 0 0.5rem 0.75rem;
-  --box-shadow-medium: 0 1rem 1.5rem;
-  --box-shadow-large: 0 2rem 3rem;
+  --box-shadow-small: 0 0.25rem 0.5rem;
+  --box-shadow-medium: 0 0.75rem 1.5rem;
+  --box-shadow-large: 0 1.5rem 3rem;
+
+  --transition-duration-slow: 0.5s;
+  --transition-duration-medium: 0.25s;
+  --transition-duration-fast: 0.125s;
 }

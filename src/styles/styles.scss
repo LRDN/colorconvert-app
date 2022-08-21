@@ -12,6 +12,7 @@ body {
   a {
     color: currentColor;
     text-decoration: underline;
+    transition: color var(--transition-duration-medium);
   }
 
   strong {

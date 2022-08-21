@@ -1,0 +1,41 @@
+.switch {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+
+  &__container {
+    position: relative;
+    width: 2.25rem;
+    height: 1.25rem;
+    background-color: var(--switch-background-color);
+    border-radius: 0.625rem;
+
+    &--hasLabelBefore {
+      margin-left: var(--spacing-x-small);
+    }
+
+    &--hasLabelAfter {
+      margin-right: var(--spacing-x-small);
+    }
+  }
+
+  &__handle {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.125rem;
+    background-color: var(--switch-handle-background-color);
+    box-shadow: var(--box-shadow-small) var(--switch-handle-box-shadow-color);
+    transition: transform var(--transition-duration-medium);
+    border-radius: 0.5rem;
+  }
+
+  &__input:checked + &__handle {
+    transform: translateX(100%);
+  }
+
+  &__input {
+    display: none;
+  }
+}

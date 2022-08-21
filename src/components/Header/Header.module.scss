@@ -5,5 +5,9 @@
   &__link {
     margin-left: var(--spacing-x-small);
     color: var(--body-color-soft);
+
+    a:hover {
+      color: var(--body-color);
+    }
   }
 }
