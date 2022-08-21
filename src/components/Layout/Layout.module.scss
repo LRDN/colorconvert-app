@@ -1,0 +1,26 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    position: relative;
+    flex-basis: 100%;
+    max-width: 56rem;
+    margin: var(--spacing-xx-large);
+  }
+
+  &__header,
+  &__footer {
+    padding: 0 var(--spacing-x-large);
+  }
+
+  &__body {
+    padding: var(--spacing-x-large);
+    margin: var(--spacing-x-large) 0;
+    background-color: var(--layout-body-background-color);
+    box-shadow: var(--box-shadow-large) var(--layout-body-box-shadow-color);
+    border-radius: var(--border-radius-large);
+  }
+}

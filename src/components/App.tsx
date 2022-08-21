@@ -4,9 +4,10 @@ import 'normalize.css/normalize.css'
 import '@styles/styles.scss'
 
 import type { FC } from 'react'
+import Layout from '@components/Layout'
 
 const App: FC = () => {
-  return <></>
+  return <Layout />
 }
 
 export default App

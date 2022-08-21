@@ -1,4 +1,12 @@
 :root {
+  --spacing-xx-small: 0.25rem;
+  --spacing-x-small: 0.5rem;
+  --spacing-small: 0.75rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 1.5rem;
+  --spacing-x-large: 2rem;
+  --spacing-xx-large: 3rem;
+
   --line-height-small: 1.125;
   --line-height-normal: 1.25;
   --line-height-medium: 1.375;
@@ -11,4 +19,12 @@
 
   --font-weight-normal: 400;
   --font-weight-bold: 700;
+
+  --border-radius-small: 0.25rem;
+  --border-radius-medium: 0.5rem;
+  --border-radius-large: 1rem;
+
+  --box-shadow-small: 0 0.5rem 0.75rem;
+  --box-shadow-medium: 0 1rem 1.5rem;
+  --box-shadow-large: 0 2rem 3rem;
 }

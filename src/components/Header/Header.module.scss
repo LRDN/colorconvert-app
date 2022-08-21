@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  align-items: center;
+
+  &__link {
+    margin-left: var(--spacing-x-small);
+    color: var(--body-color-soft);
+  }
+}

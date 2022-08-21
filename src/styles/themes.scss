@@ -2,5 +2,9 @@
 
 :root {
   --body-color: #{$gray-100};
+  --body-color-soft: #{$gray-50};
   --body-background-color: #{$gray-10};
+
+  --layout-body-background-color: #{$white};
+  --layout-body-box-shadow-color: #{rgba($gray-50, 0.25)};
 }
