@@ -1,0 +1,20 @@
+@import 'variables';
+@import 'themes';
+
+body {
+  color: var(--body-color);
+  font-family: 'Inter', sans-serif;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  background-color: var(--body-background-color);
+
+  a {
+    color: currentColor;
+    text-decoration: underline;
+  }
+
+  strong {
+    font-weight: var(--font-weight-bold);
+  }
+}

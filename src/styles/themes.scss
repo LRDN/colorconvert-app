@@ -1,0 +1,6 @@
+@use 'colors' as *;
+
+:root {
+  --body-color: #{$gray-100};
+  --body-background-color: #{$gray-10};
+}
