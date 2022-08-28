@@ -1,13 +1,4 @@
-import { useEffect, useState } from 'react'
-
-const parseStorageValue = (storage: Storage, key: string) => {
-  try {
-    const storageItem = storage.getItem(key)
-    return JSON.parse(storageItem!)
-  } catch (error) {
-    storage.removeItem(key)
-  }
-}
+import { useCallback, useEffect, useState } from 'react'
 
 const useLocalStorage = (
   key: string,
@@ -15,14 +6,17 @@ const useLocalStorage = (
   sessionOnly: boolean = false,
 ) => {
   const storage = sessionOnly ? sessionStorage : localStorage
-  const [value, _setValue] = useState(() => {
-    if (storage) {
-      const storageValue = parseStorageValue(storage, key)
-      if (storageValue !== null) return storageValue
+  const getStorageValue = useCallback(() => {
+    try {
+      const storageItem = storage.getItem(key)
+      return JSON.parse(storageItem!) ?? initialValue
+    } catch {
+      storage.removeItem(key)
+      return initialValue
     }
+  }, [key, storage, initialValue])
 
-    return initialValue
-  })
+  const [value, _setValue] = useState(getStorageValue())
 
   const setValue = (newValue: any) => {
     if (typeof newValue === 'function') newValue = newValue(value)
@@ -32,15 +26,12 @@ const useLocalStorage = (
 
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
-      if (event.key === key) {
-        const storageValue = parseStorageValue(storage, key)
-        _setValue(storageValue !== null ? storageValue : initialValue)
-      }
+      if (event.key === key) _setValue(getStorageValue())
     }
 
     window.addEventListener('storage', handleStorage)
     return () => window.removeEventListener('storage', handleStorage)
-  }, [key, storage, initialValue])
+  }, [key, getStorageValue])
 
   return [value, setValue]
 }
