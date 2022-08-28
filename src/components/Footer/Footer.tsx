@@ -1,13 +1,20 @@
 import clsx from 'clsx'
+import { useContext } from 'react'
 import Switch from '@components/Switch'
 import { Sun, Moon } from 'react-feather'
-import type { FC, HTMLProps } from 'react'
+import { ThemeContext } from '@context/ThemeContext'
+import type { FC, FormEvent, HTMLProps } from 'react'
 import styles from './Footer.module.scss'
 
 type ComponentProps = HTMLProps<HTMLElement>
 
 const Footer: FC<ComponentProps> = ({ className, ...props }) => {
   const footerClassName = clsx(className, styles.footer)
+  const { theme, setTheme } = useContext(ThemeContext)
+
+  const toggleTheme = (event: FormEvent<HTMLInputElement>) => {
+    setTheme(event.currentTarget.checked ? 'dark' : 'light')
+  }
 
   return (
     <footer className={footerClassName} {...props}>
@@ -18,6 +25,8 @@ const Footer: FC<ComponentProps> = ({ className, ...props }) => {
       <Switch
         labelBefore={<Sun className={styles.footer__icon} />}
         labelAfter={<Moon className={styles.footer__icon} />}
+        checked={theme === 'dark'}
+        onChange={toggleTheme}
       />
     </footer>
   )

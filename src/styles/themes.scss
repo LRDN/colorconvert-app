@@ -12,3 +12,16 @@
   --switch-handle-background-color: #{$white};
   --switch-handle-box-shadow-color: #{rgba($gray-50, 0.5)};
 }
+
+[data-theme='dark'] {
+  --body-color: #{$gray-10};
+  --body-color-soft: #{$gray-60};
+  --body-background-color: #{$gray-100};
+
+  --layout-body-background-color: #{$gray-90};
+  --layout-body-box-shadow-color: transparent;
+
+  --switch-background-color: #{$gray-80};
+  --switch-handle-background-color: #{$gray-100};
+  --switch-handle-box-shadow-color: transparent;
+}

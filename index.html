@@ -3,6 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <title>ColorConvert by LRDN</title>
+    <script>
+      ;(() => {
+        const theme = (() => {
+          try {
+            const storageTheme = JSON.parse(localStorage.getItem('theme'))
+            if (storageTheme) return storageTheme
+          } catch {}
+
+          const themeQuery = matchMedia('(prefers-color-scheme: dark)')
+          return themeQuery.matches ? 'dark' : 'light'
+        })()
+
+        const rootElement = document.documentElement
+        rootElement.style.colorScheme = theme
+        rootElement.dataset.theme = theme
+      })()
+    </script>
   </head>
   <body>
     <div id="app"></div>

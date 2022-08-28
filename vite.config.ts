@@ -6,6 +6,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 const minifyOptions = {
   collapseWhitespace: true,
   removeComments: true,
+  minifyJS: true,
 }
 
 const viteConfig = defineConfig({

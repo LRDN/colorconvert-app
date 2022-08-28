@@ -5,9 +5,14 @@ import '@styles/styles.scss'
 
 import type { FC } from 'react'
 import Layout from '@components/Layout'
+import { ThemeProvider } from '@context/ThemeContext'
 
 const App: FC = () => {
-  return <Layout />
+  return (
+    <ThemeProvider>
+      <Layout />
+    </ThemeProvider>
+  )
 }
 
 export default App
