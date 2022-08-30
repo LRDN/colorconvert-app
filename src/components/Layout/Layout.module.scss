@@ -17,10 +17,20 @@
   }
 
   &__body {
-    padding: var(--spacing-x-large);
+    display: flex;
+    flex-wrap: wrap;
     margin: var(--spacing-x-large) 0;
     background-color: var(--layout-body-background-color);
     box-shadow: var(--box-shadow-large) var(--layout-body-box-shadow-color);
     border-radius: var(--border-radius-large);
+
+    & > * {
+      flex-basis: 50%;
+      box-sizing: border-box;
+    }
+
+    & > :nth-child(3) {
+      flex-basis: 100%;
+    }
   }
 }
