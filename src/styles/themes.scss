@@ -12,6 +12,9 @@
   --switch-background-color: #{$gray-30};
   --switch-handle-background-color: #{$white};
   --switch-handle-box-shadow-color: #{rgba($gray-50, 0.5)};
+
+  --input-border-color: #{$gray-10};
+  --input-focus-background-color: #{rgba($gray-10, 0.5)};
 }
 
 [data-theme='dark'] {
@@ -26,4 +29,7 @@
   --switch-background-color: #{$gray-80};
   --switch-handle-background-color: #{$gray-100};
   --switch-handle-box-shadow-color: transparent;
+
+  --input-border-color: #{$gray-80};
+  --input-focus-background-color: #{rgba($gray-80, 0.5)};
 }

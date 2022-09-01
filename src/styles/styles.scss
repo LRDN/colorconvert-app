@@ -9,6 +9,11 @@ body {
   line-height: var(--line-height-normal);
   background-color: var(--body-background-color);
 
+  ::selection {
+    color: var(--body-background-color);
+    background-color: var(--body-color);
+  }
+
   a {
     color: currentColor;
     text-decoration: underline;
@@ -16,5 +21,13 @@ body {
 
   strong {
     font-weight: var(--font-weight-bold);
+  }
+
+  input {
+    color: currentColor;
+    background: transparent;
+    appearance: none;
+    outline: none;
+    border: none;
   }
 }

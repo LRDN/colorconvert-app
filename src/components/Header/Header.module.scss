@@ -3,7 +3,7 @@
   align-items: center;
 
   &__link {
-    margin-left: var(--spacing-x-small);
+    margin: 0.125rem 0 0 var(--spacing-x-small);
     color: var(--body-color-soft);
 
     a:hover {

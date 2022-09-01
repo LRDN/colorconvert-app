@@ -19,8 +19,9 @@ const Footer: FC<ComponentProps> = ({ className, ...props }) => {
   return (
     <footer className={footerClassName} {...props}>
       <div className={styles.footer__attribution}>
-        Built using <a href="https://github.com/vitejs/vite">Vite</a> and{' '}
-        <a href="https://github.com/feathericons/feather">Feather Icons</a>
+        Built using <a href="https://github.com/vitejs/vite">Vite</a>,{' '}
+        <a href="https://github.com/feathericons/feather">Feather Icons</a> and{' '}
+        <a href="https://github.com/omgovich/colord">Colord</a>
       </div>
       <Switch
         labelBefore={<Sun className={styles.footer__icon} />}

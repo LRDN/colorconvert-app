@@ -1,4 +1,33 @@
 .colorForm {
-  padding: var(--spacing-x-large);
   border-left: 0.0625rem solid var(--layout-body-border-color);
+
+  &__field {
+    display: flex;
+    height: 4rem;
+    cursor: text;
+    align-items: center;
+    padding: 0 var(--spacing-x-large);
+
+    &:first-child {
+      border-top-right-radius: var(--border-radius-large);
+    }
+
+    &:not(:last-child) {
+      border-bottom: 0.0625rem solid var(--input-border-color);
+    }
+
+    &--focus {
+      background-color: var(--input-focus-background-color);
+    }
+  }
+
+  &__label {
+    flex-basis: 15%;
+    user-select: none;
+    color: var(--body-color-soft);
+  }
+
+  &__input {
+    flex-basis: 85%;
+  }
 }
