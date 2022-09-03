@@ -2,18 +2,14 @@ import clsx from 'clsx'
 import { colord } from 'colord'
 import type { FC, FormEvent } from 'react'
 import colorModels from '@helpers/colorModels'
-import { useEffect, useRef, useState } from 'react'
+import { ColorContext } from '@context/ColorContext'
+import { useContext, useRef, useState } from 'react'
 import styles from './ColorForm.module.scss'
 
 const ColorForm: FC = () => {
-  const [color, setColor] = useState('#0055ff')
-  const [inputValue, setInputValue] = useState('')
+  const { colors, setColors, activeColor } = useContext(ColorContext)
   const [focusedInput, setFocusedInput] = useState(null)
   const inputRefs = useRef<Record<string, any>>({})
-
-  useEffect(() => {
-    if (colord(inputValue).isValid()) setColor(inputValue)
-  }, [inputValue])
 
   return (
     <div className={styles.colorForm}>
@@ -24,13 +20,22 @@ const ColorForm: FC = () => {
         })
 
         const handleChange = (event: FormEvent<HTMLInputElement>) => {
-          const matchesModel = event.currentTarget.value.match(model.regex)
-          setInputValue(matchesModel ? event.currentTarget.value : '')
+          const { value } = event.currentTarget
+
+          if (value.match(model.regex)) {
+            setColors((colors: string[]) => {
+              if (colord(value).isValid()) {
+                colors[activeColor] = colord(value).toHex()
+              }
+
+              return [...colors]
+            })
+          }
         }
 
         const value = isFocusedInput
           ? inputRefs.current[id].value
-          : model.converter(color)
+          : model.converter(colors[activeColor])
 
         return (
           <div

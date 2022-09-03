@@ -15,6 +15,12 @@
 
   --input-border-color: #{$gray-10};
   --input-focus-background-color: #{rgba($gray-10, 0.5)};
+
+  --color-swatch-border-color: #{$gray-30};
+  --color-swatch-background-color: #{$gray-10};
+
+  --transparency-background-color: #{$white};
+  --transparency-alternate-background-color: #{$gray-10};
 }
 
 [data-theme='dark'] {
@@ -32,4 +38,10 @@
 
   --input-border-color: #{$gray-80};
   --input-focus-background-color: #{rgba($gray-80, 0.5)};
+
+  --color-swatch-border-color: #{$gray-70};
+  --color-swatch-background-color: #{$gray-80};
+
+  --transparency-background-color: #{$gray-90};
+  --transparency-alternate-background-color: #{$gray-80};
 }

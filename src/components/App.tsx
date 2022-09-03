@@ -9,15 +9,18 @@ import ColorForm from '@components/ColorForm'
 import ColorPicker from '@components/ColorPicker'
 import ColorSwatch from '@components/ColorSwatch'
 import { ThemeProvider } from '@context/ThemeContext'
+import { ColorProvider } from '@context/ColorContext'
 
 const App: FC = () => {
   return (
     <ThemeProvider>
-      <Layout>
-        <ColorPicker />
-        <ColorForm />
-        <ColorSwatch />
-      </Layout>
+      <ColorProvider>
+        <Layout>
+          <ColorPicker />
+          <ColorForm />
+          <ColorSwatch />
+        </Layout>
+      </ColorProvider>
     </ThemeProvider>
   )
 }
