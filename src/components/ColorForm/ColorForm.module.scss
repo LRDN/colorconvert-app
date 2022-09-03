@@ -2,6 +2,7 @@
   border-left: 0.0625rem solid var(--layout-body-border-color);
 
   &__field {
+    position: relative;
     display: flex;
     height: 4rem;
     cursor: text;
@@ -29,5 +30,31 @@
 
   &__input {
     flex-basis: 85%;
+  }
+
+  &__copyButton {
+    position: absolute;
+    display: none;
+    top: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    right: var(--spacing-large);
+    padding: var(--spacing-x-small);
+    color: var(--body-color-soft);
+    transform: translateY(-50%);
+
+    &:active {
+      color: var(--body-color);
+    }
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  &__field:hover &__copyButton {
+    display: flex;
   }
 }

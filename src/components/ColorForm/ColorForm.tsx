@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { colord } from 'colord'
+import { Copy } from 'react-feather'
 import type { FC, FormEvent } from 'react'
 import colorModels from '@helpers/colorModels'
 import { ColorContext } from '@context/ColorContext'
@@ -14,12 +15,13 @@ const ColorForm: FC = () => {
   return (
     <div className={styles.colorForm}>
       {Object.entries(colorModels).map(([id, model]) => {
+        const modelColor = model.converter(colors[activeColor])
         const isFocusedInput = focusedInput === inputRefs.current[id]
         const fieldClassName = clsx(styles.colorForm__field, {
           [styles['colorForm__field--focus']]: isFocusedInput,
         })
 
-        const handleChange = (event: FormEvent<HTMLInputElement>) => {
+        const handleInputChange = (event: FormEvent<HTMLInputElement>) => {
           const { value } = event.currentTarget
 
           if (value.match(model.regex)) {
@@ -33,9 +35,15 @@ const ColorForm: FC = () => {
           }
         }
 
-        const value = isFocusedInput
+        const handleCopyClick = (event: FormEvent<HTMLSpanElement>) => {
+          const copyColor = modelColor.replace(/^~/, '')
+          navigator.clipboard.writeText(copyColor)
+          event.stopPropagation()
+        }
+
+        const inputValue = isFocusedInput
           ? inputRefs.current[id].value
-          : model.converter(colors[activeColor])
+          : modelColor
 
         return (
           <div
@@ -49,10 +57,16 @@ const ColorForm: FC = () => {
               ref={(ref) => (inputRefs.current[id] = ref)}
               onFocus={() => setFocusedInput(inputRefs.current[id])}
               onBlur={() => setFocusedInput(null)}
-              onChange={handleChange}
-              value={value}
+              onChange={handleInputChange}
+              value={inputValue}
               type="text"
             />
+            <span
+              className={styles.colorForm__copyButton}
+              onClick={handleCopyClick}
+            >
+              <Copy />
+            </span>
           </div>
         )
       })}
