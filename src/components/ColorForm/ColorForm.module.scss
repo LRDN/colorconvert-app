@@ -1,4 +1,5 @@
 .colorForm {
+  user-select: none;
   border-left: 0.0625rem solid var(--layout-body-border-color);
 
   &__field {
@@ -24,7 +25,6 @@
 
   &__label {
     flex-basis: 15%;
-    user-select: none;
     color: var(--body-color-soft);
   }
 

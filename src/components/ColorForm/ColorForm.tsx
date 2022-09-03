@@ -59,6 +59,7 @@ const ColorForm: FC = () => {
               onBlur={() => setFocusedInput(null)}
               onChange={handleInputChange}
               value={inputValue}
+              spellCheck={false}
               type="text"
             />
             <span
