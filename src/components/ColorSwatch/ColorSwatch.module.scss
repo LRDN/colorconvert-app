@@ -44,4 +44,32 @@
       border-radius: var(--border-radius-medium);
     }
   }
+
+  &__clearButton {
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: 0;
+    width: 1.375rem;
+    height: 1.375rem;
+    align-items: center;
+    justify-content: center;
+    color: var(--body-background-color);
+    background-color: var(--body-color);
+    animation: scale var(--transition-duration-fast);
+    transform: translate(50%, -50%);
+    border-radius: 100%;
+
+    @keyframes scale {
+      0% {
+        transform: translate(50%, -50%) scale(0.75);
+      }
+    }
+
+    svg {
+      width: 0.875rem;
+      height: 0.875rem;
+      stroke-width: 0.1875rem;
+    }
+  }
 }
