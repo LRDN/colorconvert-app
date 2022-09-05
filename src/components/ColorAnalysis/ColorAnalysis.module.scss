@@ -1,0 +1,19 @@
+.colorAnalysis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-x-small) var(--spacing-xx-large);
+
+  &__item {
+    display: flex;
+    flex-basis: 50%;
+    justify-content: space-between;
+  }
+
+  &__label {
+    color: var(--body-color-soft);
+  }
+
+  &__value {
+    text-align: right;
+  }
+}
