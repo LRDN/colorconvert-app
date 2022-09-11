@@ -10,6 +10,7 @@
     position: relative;
     width: 16rem;
     height: 16rem;
+    user-select: none;
     margin-right: var(--spacing-x-large);
     background: radial-gradient(circle closest-side, white, transparent),
       conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
@@ -20,6 +21,7 @@
     position: relative;
     width: 1rem;
     height: 16rem;
+    user-select: none;
     border-radius: 0.5rem;
 
     &::before {

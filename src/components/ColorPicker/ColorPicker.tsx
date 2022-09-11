@@ -1,16 +1,31 @@
 import type { FC } from 'react'
 import { colord } from 'colord'
 import { useContext } from 'react'
+import type { HsvaColor } from 'colord'
+import Interaction from '@components/Interaction'
 import Transparency from '@components/Transparency'
 import { ColorContext } from '@context/ColorContext'
 import ColorAnalysis from '@components/ColorAnalysis'
+import type { Position } from '@components/Interaction'
 import styles from './ColorPicker.module.scss'
 
 const ColorPicker: FC = () => {
-  const { colors, activeColor } = useContext(ColorContext)
+  const { colors, setColors, activeColor } = useContext(ColorContext)
   const { h, s, v, a } = colord(colors[activeColor]).toHsv()
 
+  const setHsvaColor = (color: HsvaColor) => {
+    setColors((colors: string[]) => {
+      colors[activeColor] = colord(color).toHex()
+      return [...colors]
+    })
+  }
+
   const hue = {
+    handleWheelMove: ({ top, left }: Position) => {
+      const h = 0 - Math.atan2(left - 50, top - 50) / (Math.PI / 180) + 180
+      const s = Math.sqrt(Math.pow(top - 50, 2) + Math.pow(left - 50, 2)) * 2
+      setHsvaColor({ h, s, v, a })
+    },
     handleStyle: {
       color: colord({ h, s, v: 100, a: 1 }).toHex(),
       top: 50 + (s / 2) * Math.sin((h - 90) * (Math.PI / 180)) + '%',
@@ -19,6 +34,9 @@ const ColorPicker: FC = () => {
   }
 
   const value = {
+    handleSliderMove: ({ top }: Position) => {
+      setHsvaColor({ h, s, v: 100 - top, a })
+    },
     sliderStyle: { color: colord({ h, s, v: 100, a: 1 }).toHex() },
     handleStyle: {
       color: colord({ h, s, v, a: 1 }).toHex(),
@@ -27,6 +45,9 @@ const ColorPicker: FC = () => {
   }
 
   const alpha = {
+    handleSliderMove: ({ top }: Position) => {
+      setHsvaColor({ h, s, v, a: (100 - top) / 100 })
+    },
     sliderStyle: { color: colord({ h, s, v, a: 1 }).toHex() },
     handleStyle: {
       color: colord({ h, s, v, a }).toHex(),
@@ -36,18 +57,30 @@ const ColorPicker: FC = () => {
 
   return (
     <div className={styles.colorPicker}>
-      <div className={styles.colorPicker__wheel}>
+      <Interaction
+        className={styles.colorPicker__wheel}
+        onMove={hue.handleWheelMove}
+        clampPosition={false}
+      >
         <div className={styles.colorPicker__handle} style={hue.handleStyle} />
-      </div>
-      <div className={styles.colorPicker__slider} style={value.sliderStyle}>
+      </Interaction>
+      <Interaction
+        className={styles.colorPicker__slider}
+        onMove={value.handleSliderMove}
+        style={value.sliderStyle}
+      >
         <div className={styles.colorPicker__handle} style={value.handleStyle} />
-      </div>
-      <div className={styles.colorPicker__slider} style={alpha.sliderStyle}>
+      </Interaction>
+      <Interaction
+        className={styles.colorPicker__slider}
+        onMove={alpha.handleSliderMove}
+        style={alpha.sliderStyle}
+      >
         <div className={styles.colorPicker__handle} style={alpha.handleStyle}>
           <Transparency />
         </div>
         <Transparency />
-      </div>
+      </Interaction>
       <ColorAnalysis className={styles.colorPicker__analysis} />
     </div>
   )

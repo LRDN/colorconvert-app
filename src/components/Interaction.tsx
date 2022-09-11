@@ -2,8 +2,9 @@ import clampNumber from '@helpers/clampNumber'
 import type { FC, HTMLProps, ReactNode } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+type Position = { top: number; left: number }
 type ComponentProps = HTMLProps<HTMLDivElement> & {
-  onMove?: (position: { top: number; left: number }) => void
+  onMove?: (position: Position) => void
   clampPosition?: boolean
   children?: ReactNode
 }
@@ -74,4 +75,5 @@ const Interaction: FC<ComponentProps> = ({
   )
 }
 
+export type { Position }
 export default Interaction
