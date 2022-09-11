@@ -15,7 +15,7 @@ const ColorPicker: FC = () => {
 
   const setHsvaColor = (color: HsvaColor) => {
     setColors((colors: string[]) => {
-      colors[activeColor] = colord(color).toHex()
+      colors[activeColor] = colord(color).toLchString()
       return [...colors]
     })
   }

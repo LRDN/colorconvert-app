@@ -22,6 +22,7 @@ const ColorSwatch: FC = () => {
       {colors.map((color: string, index: number) => {
         const isActiveColor = index === activeColor
         const hasClearButton = color && !!index && isActiveColor
+        const itemStyle = { color: color && colord(color).toHex() }
         const itemClassName = clsx(styles.colorSwatch__item, {
           [styles['colorSwatch__item--active']]: isActiveColor,
         })
@@ -31,7 +32,7 @@ const ColorSwatch: FC = () => {
             setColors((colors: string[]) => {
               const randomHue = colord(colors[0]).hue() + index * 25
               const randomColor = { h: randomHue, s: 75, l: 50 }
-              colors[index] = colord(randomColor).toHex()
+              colors[index] = colord(randomColor).toLchString()
               return [...colors]
             })
           }
@@ -53,7 +54,7 @@ const ColorSwatch: FC = () => {
           <div
             className={itemClassName}
             onClick={handleItemClick}
-            style={{ color }}
+            style={itemStyle}
             key={index}
           >
             {color && <Transparency />}

@@ -27,7 +27,7 @@ const ColorForm: FC = () => {
           if (value.match(model.regex)) {
             setColors((colors: string[]) => {
               if (colord(value).isValid()) {
-                colors[activeColor] = colord(value).toHex()
+                colors[activeColor] = colord(value).toLchString()
               }
 
               return [...colors]

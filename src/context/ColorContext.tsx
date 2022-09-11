@@ -1,3 +1,4 @@
+import { colord } from 'colord'
 import { createContext } from 'react'
 import type { FC, ReactNode } from 'react'
 import useLocalStorage from '@hooks/useLocalStorage'
@@ -8,9 +9,11 @@ type ProviderProps = {
 
 const ColorContext = createContext<Record<string, any>>({})
 const ColorProvider: FC<ProviderProps> = ({ children }) => {
-  const initialColors = ['#0055ff', ...Array(13).fill('')]
-  const [colors, setColors] = useLocalStorage('colors', initialColors)
   const [activeColor, setActiveColor] = useLocalStorage('activeColor', 0)
+  const [colors, setColors] = useLocalStorage('colors', [
+    colord('#0055ff').toLchString(),
+    ...Array(13).fill(''),
+  ])
 
   return (
     <ColorContext.Provider
