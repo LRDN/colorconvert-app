@@ -40,12 +40,21 @@
     align-items: center;
     justify-content: center;
     right: var(--spacing-large);
-    padding: var(--spacing-x-small);
     color: var(--body-color-soft);
+    padding: var(--spacing-x-small);
+    transition: transform var(--transition-duration-fast);
+    animation: scale var(--transition-duration-fast);
     transform: translateY(-50%);
 
+    @keyframes scale {
+      0% {
+        transform: translateY(-50%) scale(0.75);
+      }
+    }
+
     &:active {
-      color: var(--body-color);
+      transition: none;
+      transform: translateY(-50%) scale(1.25);
     }
 
     svg {
