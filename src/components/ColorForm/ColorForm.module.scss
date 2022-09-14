@@ -43,10 +43,10 @@
     color: var(--body-color-soft);
     padding: var(--spacing-x-small);
     transition: transform var(--transition-duration-fast);
-    animation: scale var(--transition-duration-fast);
+    animation: scaleCopyButton var(--transition-duration-fast);
     transform: translateY(-50%);
 
-    @keyframes scale {
+    @keyframes scaleCopyButton {
       0% {
         transform: translateY(-50%) scale(0.75);
       }
