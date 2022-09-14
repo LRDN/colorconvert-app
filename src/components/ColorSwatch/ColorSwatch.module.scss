@@ -39,10 +39,32 @@
     &--active::after {
       transform: translateX(-50%) scaleX(1);
     }
+  }
 
-    svg {
-      border-radius: var(--border-radius-medium);
+  &__transparency {
+    border-radius: var(--border-radius-medium);
+  }
+
+  &__plusIcon {
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--body-color-soft);
+    animation: scalePlusIcon var(--transition-duration-fast);
+    transform: translate(-50%, -50%);
+
+    @keyframes scalePlusIcon {
+      0% {
+        transform: translate(-50%, -50%) scale(0);
+      }
     }
+  }
+
+  &__item:hover &__plusIcon {
+    display: block;
   }
 
   &__clearButton {
@@ -56,11 +78,11 @@
     justify-content: center;
     color: var(--body-background-color);
     background-color: var(--body-color);
-    animation: scale var(--transition-duration-fast);
+    animation: scaleClearButton var(--transition-duration-fast);
     transform: translate(50%, -50%);
     border-radius: 100%;
 
-    @keyframes scale {
+    @keyframes scaleClearButton {
       0% {
         transform: translate(50%, -50%) scale(0.75);
       }

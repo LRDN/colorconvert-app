@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { colord } from 'colord'
-import { X } from 'react-feather'
 import { useContext } from 'react'
+import { Plus, X } from 'react-feather'
 import type { FC, FormEvent } from 'react'
 import Transparency from '@components/Transparency'
 import { ColorContext } from '@context/ColorContext'
@@ -57,7 +57,11 @@ const ColorSwatch: FC = () => {
             style={itemStyle}
             key={index}
           >
-            {color && <Transparency />}
+            {color ? (
+              <Transparency className={styles.colorSwatch__transparency} />
+            ) : (
+              <Plus className={styles.colorSwatch__plusIcon} />
+            )}
             {hasClearButton && (
               <span
                 className={styles.colorSwatch__clearButton}
