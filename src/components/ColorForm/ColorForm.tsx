@@ -2,21 +2,24 @@ import clsx from 'clsx'
 import { colord } from 'colord'
 import { Copy } from 'react-feather'
 import type { FC, FormEvent } from 'react'
-import colorModels from '@helpers/colorModels'
+import matchColor from '@helpers/matchColor'
+import convertColor from '@helpers/convertColor'
 import { ColorContext } from '@context/ColorContext'
 import { useContext, useRef, useState } from 'react'
+import type { ColorModel } from '@helpers/matchColor'
 import styles from './ColorForm.module.scss'
 
 const ColorForm: FC = () => {
   const { colors, setColors, activeColor } = useContext(ColorContext)
+  const convertedColor = convertColor(colors[activeColor])
   const [focusedInput, setFocusedInput] = useState(null)
   const inputRefs = useRef<Record<string, any>>({})
 
   return (
     <div className={styles.colorForm}>
-      {Object.entries(colorModels).map(([id, model]) => {
-        const modelColor = model.converter(colors[activeColor])
-        const isFocusedInput = focusedInput === inputRefs.current[id]
+      {Object.entries(convertedColor).map((colorEntry) => {
+        const [model, color] = colorEntry as [ColorModel, string]
+        const isFocusedInput = focusedInput === inputRefs.current[model]
         const fieldClassName = clsx(styles.colorForm__field, {
           [styles['colorForm__field--focus']]: isFocusedInput,
         })
@@ -24,38 +27,38 @@ const ColorForm: FC = () => {
         const handleInputChange = (event: FormEvent<HTMLInputElement>) => {
           const { value } = event.currentTarget
 
-          if (value.match(model.regex)) {
-            setColors((colors: string[]) => {
-              if (colord(value).isValid()) {
-                colors[activeColor] = colord(value).toLchString()
-              }
+          setColors((colors: string[]) => {
+            if (matchColor(value, model) && colord(value).isValid()) {
+              colors[activeColor] = colord(value).toLchString()
+            }
 
-              return [...colors]
-            })
-          }
+            return [...colors]
+          })
         }
 
         const handleCopyClick = (event: FormEvent<HTMLSpanElement>) => {
-          const copyColor = modelColor.replace(/^~/, '')
+          const copyColor = color.replace(/^~/, '')
           navigator.clipboard.writeText(copyColor)
           event.stopPropagation()
         }
 
         const inputValue = isFocusedInput
-          ? inputRefs.current[id].value
-          : modelColor
+          ? inputRefs.current[model].value
+          : color
 
         return (
           <div
-            key={id}
+            key={model}
             className={fieldClassName}
-            onClick={() => inputRefs.current[id].focus()}
+            onClick={() => inputRefs.current[model].focus()}
           >
-            <span className={styles.colorForm__label}>{id.toUpperCase()}</span>
+            <span className={styles.colorForm__label}>
+              {model.toUpperCase()}
+            </span>
             <input
               className={styles.colorForm__input}
-              ref={(ref) => (inputRefs.current[id] = ref)}
-              onFocus={() => setFocusedInput(inputRefs.current[id])}
+              ref={(ref) => (inputRefs.current[model] = ref)}
+              onFocus={() => setFocusedInput(inputRefs.current[model])}
               onBlur={() => setFocusedInput(null)}
               onChange={handleInputChange}
               value={inputValue}
