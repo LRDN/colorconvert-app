@@ -1,11 +1,13 @@
-import type { Colord } from 'colord'
-import { colord, extend } from 'colord'
+import type { AnyColor } from 'colord'
 import a11yPlugin from 'colord/plugins/a11y'
+import { Colord, colord, extend } from 'colord'
 
 extend([a11yPlugin])
 
-const analyzeColor = (color: string | Colord) => {
-  if (typeof color === 'string') color = colord(color)
+const analyzeColor = (color: AnyColor | Colord) => {
+  if (!(color instanceof Colord)) {
+    color = colord(color)
+  }
 
   return {
     hue: color.hue() + '°',

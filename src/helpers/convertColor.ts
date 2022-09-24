@@ -1,14 +1,16 @@
-import type { Colord } from 'colord'
-import { colord, extend } from 'colord'
+import type { AnyColor } from 'colord'
 import hwbPlugin from 'colord/plugins/hwb'
 import lchPlugin from 'colord/plugins/lch'
 import cmykPlugin from 'colord/plugins/cmyk'
 import namesPlugin from 'colord/plugins/names'
+import { Colord, colord, extend } from 'colord'
 
 extend([cmykPlugin, hwbPlugin, lchPlugin, namesPlugin])
 
-const convertColor = (color: string | Colord) => {
-  if (typeof color === 'string') color = colord(color)
+const convertColor = (color: AnyColor | Colord) => {
+  if (!(color instanceof Colord)) {
+    color = colord(color)
+  }
 
   return {
     hex: color.toHex(),

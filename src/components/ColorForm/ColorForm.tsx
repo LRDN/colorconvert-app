@@ -4,6 +4,7 @@ import { Copy } from 'react-feather'
 import type { FC, FormEvent } from 'react'
 import matchColor from '@helpers/matchColor'
 import convertColor from '@helpers/convertColor'
+import type { Color } from '@context/ColorContext'
 import { ColorContext } from '@context/ColorContext'
 import { useContext, useRef, useState } from 'react'
 import type { ColorModel } from '@helpers/matchColor'
@@ -27,9 +28,9 @@ const ColorForm: FC = () => {
         const handleInputChange = (event: FormEvent<HTMLInputElement>) => {
           const { value } = event.currentTarget
 
-          setColors((colors: string[]) => {
+          setColors((colors: Color[]) => {
             if (matchColor(value, model) && colord(value).isValid()) {
-              colors[activeColor] = colord(value).toLchString()
+              colors[activeColor] = colord(value).rgba
             }
 
             return [...colors]
@@ -41,10 +42,6 @@ const ColorForm: FC = () => {
           navigator.clipboard.writeText(copyColor)
           event.stopPropagation()
         }
-
-        const inputValue = isFocusedInput
-          ? inputRefs.current[model].value
-          : color
 
         return (
           <div
@@ -58,10 +55,10 @@ const ColorForm: FC = () => {
             <input
               className={styles.colorForm__input}
               ref={(ref) => (inputRefs.current[model] = ref)}
+              value={isFocusedInput ? inputRefs.current[model].value : color}
               onFocus={() => setFocusedInput(inputRefs.current[model])}
               onBlur={() => setFocusedInput(null)}
               onChange={handleInputChange}
-              value={inputValue}
               spellCheck={false}
               type="text"
             />

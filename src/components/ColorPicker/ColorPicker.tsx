@@ -3,6 +3,7 @@ import { colord } from 'colord'
 import { useContext } from 'react'
 import type { HsvaColor } from 'colord'
 import Interaction from '@components/Interaction'
+import type { Color } from '@context/ColorContext'
 import Transparency from '@components/Transparency'
 import { ColorContext } from '@context/ColorContext'
 import ColorAnalysis from '@components/ColorAnalysis'
@@ -14,8 +15,8 @@ const ColorPicker: FC = () => {
   const { h, s, v, a } = colord(colors[activeColor]).toHsv()
 
   const setHsvaColor = (color: HsvaColor) => {
-    setColors((colors: string[]) => {
-      colors[activeColor] = colord(color).toLchString()
+    setColors((colors: Color[]) => {
+      colors[activeColor] = { ...color, v: color.v || 1e-25 }
       return [...colors]
     })
   }

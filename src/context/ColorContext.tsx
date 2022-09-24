@@ -1,19 +1,33 @@
-import { colord } from 'colord'
-import { createContext } from 'react'
 import type { FC, ReactNode } from 'react'
+import { HsvaColor, RgbaColor } from 'colord'
 import useLocalStorage from '@hooks/useLocalStorage'
+import { createContext, useCallback, useEffect, useState } from 'react'
 
 type ProviderProps = {
   children?: ReactNode
 }
 
+type Color = HsvaColor | RgbaColor | null
+
 const ColorContext = createContext<Record<string, any>>({})
 const ColorProvider: FC<ProviderProps> = ({ children }) => {
-  const [activeColor, setActiveColor] = useLocalStorage('activeColor', 0)
+  const [activeColor, setActiveColor] = useState(0)
   const [colors, setColors] = useLocalStorage('colors', [
-    colord('#0055ff').toLchString(),
-    ...Array(13).fill(''),
+    { r: 0, g: 85, b: 255, a: 1 },
+    ...Array(13).fill(null),
   ])
+
+  const getPreviousColor = useCallback(() => {
+    for (let i = activeColor - 1; i >= 0; i--) {
+      if (colors[i]) return i
+    }
+  }, [colors, activeColor])
+
+  useEffect(() => {
+    if (!colors[activeColor]) {
+      setActiveColor(getPreviousColor()!)
+    }
+  }, [colors, activeColor, getPreviousColor])
 
   return (
     <ColorContext.Provider
@@ -24,4 +38,5 @@ const ColorProvider: FC<ProviderProps> = ({ children }) => {
   )
 }
 
+export type { Color }
 export { ColorContext, ColorProvider }
