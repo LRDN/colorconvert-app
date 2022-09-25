@@ -71,6 +71,7 @@ const ColorPicker: FC = () => {
         style={value.sliderStyle}
       >
         <div className={styles.colorPicker__handle} style={value.handleStyle} />
+        <Transparency />
       </Interaction>
       <Interaction
         className={styles.colorPicker__slider}
