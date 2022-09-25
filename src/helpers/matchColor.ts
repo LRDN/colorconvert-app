@@ -8,11 +8,10 @@ const colorPatterns = {
   css: /^[a-z]+$/i,
 }
 
-type ColorModel = keyof typeof colorPatterns
+export type ColorModel = keyof typeof colorPatterns
 
 const matchColor = (color: string, model: ColorModel) => {
   return !!color.match(colorPatterns[model])
 }
 
-export type { ColorModel }
 export default matchColor

@@ -7,7 +7,7 @@ type ProviderProps = {
   children?: ReactNode
 }
 
-type Color = HsvaColor | RgbaColor | null
+export type Color = HsvaColor | RgbaColor | null
 
 const ColorContext = createContext<Record<string, any>>({})
 const ColorProvider: FC<ProviderProps> = ({ children }) => {
@@ -38,5 +38,4 @@ const ColorProvider: FC<ProviderProps> = ({ children }) => {
   )
 }
 
-export type { Color }
 export { ColorContext, ColorProvider }
