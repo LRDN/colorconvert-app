@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 export type Position = { top: number; left: number }
 
 type ComponentProps = HTMLProps<HTMLDivElement> & {
-  onMove?: (position: Position) => void
+  onMove: (position: Position) => void
   clampPosition?: boolean
   children?: ReactNode
 }
@@ -43,7 +43,7 @@ const Interaction: FC<ComponentProps> = ({
 
   const handlePointerMove = useCallback(
     (event: PointerEvent) => {
-      if (isPointerDown && onMove) {
+      if (isPointerDown) {
         onMove(getPosition(event))
         event.preventDefault()
       }
@@ -66,7 +66,7 @@ const Interaction: FC<ComponentProps> = ({
     <div
       ref={interactionRef}
       onPointerDown={(event) => {
-        if (onMove) onMove(getPosition(event))
+        onMove(getPosition(event))
         setPointerDown(true)
       }}
       {...props}
