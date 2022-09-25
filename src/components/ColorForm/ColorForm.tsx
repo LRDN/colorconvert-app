@@ -44,11 +44,7 @@ const ColorForm: FC = () => {
         }
 
         return (
-          <div
-            key={model}
-            className={fieldClassName}
-            onClick={() => inputRefs.current[model].focus()}
-          >
+          <div key={model} className={fieldClassName}>
             <span className={styles.colorForm__label}>
               {model.toUpperCase()}
             </span>
