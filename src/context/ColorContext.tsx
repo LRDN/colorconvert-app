@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react'
-import { HsvaColor, RgbaColor } from 'colord'
+import type { HsvaColor, RgbaColor } from 'colord'
 import useLocalStorage from '@hooks/useLocalStorage'
 import { createContext, useCallback, useEffect, useState } from 'react'
 
