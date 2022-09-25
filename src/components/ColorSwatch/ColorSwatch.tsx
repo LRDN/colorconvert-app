@@ -9,7 +9,7 @@ import { ColorContext } from '@context/ColorContext'
 import styles from './ColorSwatch.module.scss'
 
 const ColorSwatch: FC = () => {
-  const { colors, setColors, activeColor, setActiveColor } =
+  const { colors, setColors, activeColor, setActiveColor, getPreviousColor } =
     useContext(ColorContext)
 
   return (
@@ -25,9 +25,8 @@ const ColorSwatch: FC = () => {
         const handleItemClick = () => {
           if (!color) {
             setColors((colors: Color[]) => {
-              const randomHue = colord(colors[0]!).hue() + index * 25
-              const randomColor = { h: randomHue, s: 75, l: 50 }
-              colors[index] = colord(randomColor).rgba
+              const hueStep = index * (360 / colors.length)
+              colors[index] = colord(colors[0]!).rotate(hueStep).rgba
               return [...colors]
             })
           }
@@ -36,6 +35,7 @@ const ColorSwatch: FC = () => {
         }
 
         const handleClearClick = (event: FormEvent<HTMLSpanElement>) => {
+          setActiveColor(getPreviousColor())
           setColors((colors: Color[]) => {
             colors[index] = null
             return [...colors]

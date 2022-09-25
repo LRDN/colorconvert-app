@@ -13,7 +13,7 @@ const ColorContext = createContext<Record<string, any>>({})
 const ColorProvider: FC<ProviderProps> = ({ children }) => {
   const [activeColor, setActiveColor] = useState(0)
   const [colors, setColors] = useLocalStorage('colors', [
-    { r: 0, g: 85, b: 255, a: 1 },
+    { r: 50, g: 85, b: 255, a: 1 },
     ...Array(13).fill(null),
   ])
 
@@ -31,7 +31,13 @@ const ColorProvider: FC<ProviderProps> = ({ children }) => {
 
   return (
     <ColorContext.Provider
-      value={{ colors, setColors, activeColor, setActiveColor }}
+      value={{
+        colors,
+        setColors,
+        activeColor,
+        setActiveColor,
+        getPreviousColor,
+      }}
     >
       {children}
     </ColorContext.Provider>
