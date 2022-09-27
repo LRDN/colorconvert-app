@@ -4,7 +4,6 @@ import { useContext } from 'react'
 import type { HsvaColor } from 'colord'
 import Interaction from '@components/Interaction'
 import type { Color } from '@context/ColorContext'
-import Transparency from '@components/Transparency'
 import { ColorContext } from '@context/ColorContext'
 import ColorAnalysis from '@components/ColorAnalysis'
 import type { Position } from '@components/Interaction'
@@ -71,17 +70,13 @@ const ColorPicker: FC = () => {
         style={value.sliderStyle}
       >
         <div className={styles.colorPicker__handle} style={value.handleStyle} />
-        <Transparency />
       </Interaction>
       <Interaction
         className={styles.colorPicker__slider}
         onMove={alpha.handleSliderMove}
         style={alpha.sliderStyle}
       >
-        <div className={styles.colorPicker__handle} style={alpha.handleStyle}>
-          <Transparency />
-        </div>
-        <Transparency />
+        <div className={styles.colorPicker__handle} style={alpha.handleStyle} />
       </Interaction>
       <ColorAnalysis className={styles.colorPicker__analysis} />
     </div>

@@ -4,7 +4,6 @@ import { useContext } from 'react'
 import { Plus, X } from 'react-feather'
 import type { FC, FormEvent } from 'react'
 import type { Color } from '@context/ColorContext'
-import Transparency from '@components/Transparency'
 import { ColorContext } from '@context/ColorContext'
 import styles from './ColorSwatch.module.scss'
 
@@ -20,6 +19,7 @@ const ColorSwatch: FC = () => {
         const itemStyle = { color: color && colord(color).toHex() }
         const itemClassName = clsx(styles.colorSwatch__item, {
           [styles['colorSwatch__item--active']]: isActiveColor,
+          [styles['colorSwatch__item--hasColor']]: color,
         })
 
         const handleItemClick = () => {
@@ -51,11 +51,7 @@ const ColorSwatch: FC = () => {
             style={itemStyle}
             key={index}
           >
-            {color ? (
-              <Transparency className={styles.colorSwatch__transparency} />
-            ) : (
-              <Plus className={styles.colorSwatch__plusIcon} />
-            )}
+            {!color && <Plus className={styles.colorSwatch__plusIcon} />}
             {hasClearButton && (
               <span
                 className={styles.colorSwatch__clearButton}

@@ -13,6 +13,14 @@
     background-color: var(--color-swatch-background-color);
     border-radius: var(--border-radius-medium);
 
+    &--hasColor {
+      background-size: 1rem 1rem;
+      background-image: repeating-conic-gradient(
+        var(--transparency-background-color) 0% 25%,
+        var(--transparency-alternate-background-color) 0% 50%
+      );
+    }
+
     &::before {
       position: absolute;
       content: '';
@@ -39,10 +47,6 @@
     &--active::after {
       transform: translateX(-50%) scaleX(1);
     }
-  }
-
-  &__transparency {
-    border-radius: var(--border-radius-medium);
   }
 
   &__plusIcon {
