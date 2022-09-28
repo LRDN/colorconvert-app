@@ -11,6 +11,7 @@
     width: 16rem;
     height: 16rem;
     user-select: none;
+    touch-action: none;
     margin-right: var(--spacing-x-large);
     background-image: radial-gradient(circle closest-side, white, transparent),
       conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
@@ -22,6 +23,7 @@
     width: 1rem;
     height: 16rem;
     user-select: none;
+    touch-action: none;
     border-radius: 0.5rem;
     background-image: linear-gradient(currentColor, black);
 
